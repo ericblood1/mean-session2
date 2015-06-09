@@ -25,33 +25,23 @@
 <!-- onmouseover="this.style.backgroundColor ='#000'"  -->
 	</div>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
 <script type="text/javascript">
 
-window.onload = function() {
-	prepareGallery();
-}
-
-function prepareGallery() {
-	var gallery = document.getElementById("imageGallery");
-	var links = gallery.getElementsByTagName("a");
-	for (var i=0; i < links.length; i++) {
-		links[i].onclick = function() {
-			showPicOne(this);
-			return false;
-		}
-	};
-}
+$(function() {
+	$('#imageGallery li a').each(function(){
+		$(this).on("click", function() {
+			var thisImg = $(this).attr("href")
+			var thisTitle = $(this).attr("title")
+			$('#placeholder').attr("src",thisImg)
+			$('#description').html(thisTitle)
+			return false
+		})
+	});
+});
 
 
-function showPicOne(whichpic) {
-	var source = whichpic.getAttribute('href');
-	var placeholder = document.getElementById("placeholder");
-	var text = whichpic.getAttribute('title');
-	var description = document.getElementById('description');
-
-	placeholder.setAttribute("src",source);
-	description.firstChild.nodeValue = text;
-}
 
 </script>
 
